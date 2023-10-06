@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MobileApp.ViewModels" x:DataType="viewmodels:ItemDetailViewModel"
+             x:Class="MobileApp.Views.ItemDetailPage"
+             xmlns:model="clr-namespace:MobileApp.Models"
+             xmlns:local="clr-namespace:MobileApp.ViewModels"
+             Title="{Binding Title}">
+
+    <!--This page follows the wireframe closely. The buttons were added after the wireframe was made because I needed to add a way to edit the term and add notifications.-->
+    
+    <ScrollView>
+        <StackLayout>
+            <StackLayout>
+                <StackLayout x:DataType="viewmodels:ItemDetailViewModel" Orientation="Vertical" >
+                    <Frame BorderColor="Black" WidthRequest="400">
+                        <StackLayout>
+                            <Label Text="Set Notification"/>
+                            <Label Text="Start or End Date"/>
+                            <Picker ItemsSource="{Binding ReminderOptionList}" SelectedItem="{Binding ReminderPick}"/>
+                            <Button Text="Add Notification" Command="{Binding SetReminderCommand}"/>
+                            <Label Text="{Binding SetNotificationConfirm}"/>
+                        </StackLayout>
+                    </Frame>
+                        <Frame BorderColor="Black" WidthRequest="400">
+                        <StackLayout>
+                            <Label Text="{Binding Term}"/>
+                            <Label Text="{Binding Status}"/>
+                            <Label Text="{Binding Text}" FontSize="Large"/>
+                            <Button Text="Edit Course" Command="{Binding ModifyCourse}"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame BorderColor="Black" WidthRequest="400">
+                        <StackLayout>
+                            <Label Text="Start Date" FontSize="Large"/>
+                            <Label Text="{Binding StartDate}" FontSize="Small"/>
+                            <Label Text="End Date" FontSize="Large"/>
+                            <Label Text="{Binding EndDate}" FontSize="Small"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            <Frame BorderColor="Black">
+                <StackLayout>
+                    <Label Text="{Binding Instruct_Name}" FontSize="Large" TextColor="Black"/>
+                    <Label Text="{Binding Instruct_Email}" />
+                    <Button Text="Add Instructor" Command="{Binding AddInstructorCom}"/>
+                    <Button Text="Edit Instructor" Command="{Binding EditInstructorCommand}"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Description:" FontSize="Medium" />
+                <Label Text="{Binding Description}" FontSize="Small"/>
+                <Label Text="{Binding Status}"/>
+            </StackLayout>
+            <Frame BorderColor="Black">
+                <StackLayout>
+                    <RefreshView x:Name="AssessList" x:DataType="local:ItemDetailViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                        <CollectionView x:Name="AssessListView"
+                        ItemsSource="{Binding AssessmentsList}"
+                        SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="10" x:DataType="model:Assessment">
+                                        <Label Text="{Binding Name}"
+                                    LineBreakMode="NoWrap" 
+                                    Style="{DynamicResource ListItemTextStyle}" 
+                                    FontSize="16" />
+                                        <Label Text="{Binding StartDate}" 
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" />
+                                        <Label Text="{Binding EndDate}" 
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                        NumberOfTapsRequired="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemDetailViewModel}}, Path=ItemTapped}"		
+                                        CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </RefreshView>
+                    <Button Text="Add Assessment" Command="{Binding GotoAddAssessment}"/>
+                </StackLayout>
+            </Frame>
+            <Button Text="Delete" Command="{Binding DeleteCommand}"/>
+            <Button Text="Share Notes" Command="{Binding OpenShareNotes}"/>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

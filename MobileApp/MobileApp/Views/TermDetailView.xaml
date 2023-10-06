@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.TermDetailView"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:MobileApp.ViewModels"  
+             xmlns:model="clr-namespace:MobileApp.Models"
+             >
+
+    <ContentPage.BindingContext>
+        <local:TermDetailsViewModel/>
+    </ContentPage.BindingContext>
+    <!-- 
+    This page follows the wireframe closely. The buttons were added after the wireframe was made because I needed to add a way to edit the course and add notifications.
+    -->
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+
+            <Button Text="Modify Term" Command="{Binding ModifyTermCommand}"/>
+
+            <Button Text="Add Course" Command="{Binding AddCourse}"/>
+
+            <Button Text="Delete Term" Command="{Binding DeleteTermCommand}"/>
+
+            <Label Text="{Binding Name}"/>
+
+            <Label Text="{Binding StartDate}"/>
+
+            <Label Text="{Binding EndDate}"/>
+
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <RefreshView x:Name="CoursesList" Grid.Row="1" x:DataType="local:TermDetailsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                        <CollectionView x:Name="ItemsListView"
+                        ItemsSource="{Binding Courses}"
+                        SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="10" x:DataType="model:Course">
+                                        <Label Text="{Binding Name}"
+                                    LineBreakMode="NoWrap" 
+                                    Style="{DynamicResource ListItemTextStyle}" 
+                                    FontSize="16" />
+                                        <Label Text="{Binding StartDate}" 
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" />
+                                        <Label Text="{Binding EndDate}" 
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                        NumberOfTapsRequired="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:TermDetailsViewModel}}, Path=ItemTapped}"		
+                                        CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </RefreshView>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

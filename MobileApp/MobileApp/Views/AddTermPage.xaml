@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MobileApp.ViewModels"
+             x:Class="MobileApp.Views.AddTermPage"
+             Title="New Term">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddTermViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                
+                <StackLayout>
+                    <Label Text="Create a new Term"
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Term Name"/>
+                    <Entry Text="{Binding Name, Mode=TwoWay}"/>
+
+                    <Label Text="Start Date"/>
+                    <DatePicker Date="{Binding StartDate, Mode=TwoWay}"/>
+                    
+                    <Label Text="End Date"/>
+                    <DatePicker Date="{Binding EndDate, Mode=TwoWay}"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content> 
+</ContentPage>

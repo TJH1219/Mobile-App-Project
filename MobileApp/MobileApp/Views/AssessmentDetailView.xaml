@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.AssessmentDetailView"
+             xmlns:local="clr-namespace:MobileApp.ViewModels"
+             >
+
+    <ContentPage.BindingContext>
+        <local:AssessmentDetailViewModel/>
+    </ContentPage.BindingContext>
+    <!-- 
+    This page follows the wireframe closely. The buttons were added after the wireframe was made because I needed to add a way to edit the course and add notifications.
+    -->
+    <ContentPage.Content>
+        <StackLayout  >
+            <Frame BorderColor="Black" WidthRequest="400">
+                <StackLayout>
+                    <Label Text="Set Notification"/>
+                    <Label Text="Start or End Date"/>
+                    <Picker ItemsSource="{Binding ReminderOptionList}" SelectedItem="{Binding ReminderPick}"/>
+                    <Button Text="Add Notification" Command="{Binding SetReminderCommand}"/>
+                    <Label Text="{Binding SetNotificationConfirm}"/>
+                </StackLayout>
+            </Frame>
+            <Label Text="Name"/>
+            <Label Text="{Binding AssessmentName}" HorizontalTextAlignment="Center" FontSize="Large"/>
+
+            <Label Text="Description"/>
+            <Label Text="{Binding Description}" FontSize="Medium" HorizontalTextAlignment="Center"/>
+
+            <Label Text="Type"/>
+            <Label Text="{Binding TypeText}" HorizontalTextAlignment="Center"/>
+            
+            
+            <Label Text="Start Date"/>
+            <Label Text="{Binding StartDate}"/>
+
+            <Label Text="End Date"/>
+            <Label Text="{Binding EndDate}"/>
+
+            <Button Text="Share Notes" Command="{Binding OpenShareNotes}"/>
+            <Button Text="Modify Assessment" Command="{Binding GotoModifyAssessment}"/>
+            <Button Text="Delete" Command="{Binding DeleteCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

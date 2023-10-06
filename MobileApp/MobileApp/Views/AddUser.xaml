@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MobileApp.ViewModels" x:DataType="viewmodels:AddUserViewModel"
+             x:Class="MobileApp.Views.AddViews.AddUser">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddUserViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <StackLayout>
+                    <Label Text="Create a new User"
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="User Name"/>
+                    <Entry Text="{Binding Username, Mode=TwoWay}"/>
+
+                    <Label Text="Password"/>
+                    <Entry Text="{Binding Password, Mode=TwoWay}"/>
+
+                    <Label Text="Student"/>
+                    <Picker ItemsSource="{Binding StudentNames}" SelectedIndex="{Binding StudentIndex, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

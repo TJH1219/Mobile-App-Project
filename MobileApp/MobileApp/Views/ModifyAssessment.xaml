@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.ModifyAssessment"
+             xmlns:local="clr-namespace:MobileApp.ViewModels">
+    
+    <ContentPage.BindingContext>
+        <local:ModifyAssessmentViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Modify Assessment"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="Name"/>
+            <Entry Text="{Binding Name}"/>
+
+            <Label Text="Description"/>
+            <Entry Text="{Binding Description}"/>
+
+            <Label Text="Performance(off) or objective(on)"/>
+            <Switch IsToggled="{Binding IsPerformance}"/>
+
+            <Label Text="Course"/>
+            <Picker SelectedIndex="{Binding SelectedNameIndex}" ItemsSource="{Binding CourseNames}"/>
+
+            <Label Text="Status"/>
+            <Picker ItemsSource="{Binding StatusList}" SelectedIndex="{Binding SelectedStatus}"/>
+
+            <Label Text="StartDate"/>
+            <DatePicker Date="{Binding StartDate, Mode=TwoWay}"/>
+
+            <Label Text="EndDate"/>
+            <DatePicker Date="{Binding EndDate, Mode=TwoWay}"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

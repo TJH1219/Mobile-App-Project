@@ -1,0 +1,42 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MobileApp.ViewModels"
+             x:Class="MobileApp.Views.ModifyStudent"
+             Title="New Term">
+
+    <ContentPage.BindingContext>
+        <viewmodels:ModifyStudentViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <StackLayout>
+
+            <Label Text="Student"/>
+            <Picker ItemsSource="{Binding StudentNames}" SelectedIndex="{Binding StudentIndex}"/>
+
+            <Label Text="Name"/>
+            <Entry Text="{Binding Name}"/>
+
+            <Label Text="Email"/>
+            <Entry Text="{Binding Email}"/>
+
+            <Label Text="Phone"/>
+            <Entry Text="{Binding Phone}"/>
+
+            <Label Text="Current Term"/>
+            <Picker ItemsSource="{Binding TermNames}" SelectedIndex="{Binding TermIndex}"/>
+
+            <Label Text="Current Course"/>
+            <Picker ItemsSource="{Binding CourseNames}" SelectedIndex="{Binding CourceIndex}"/>
+
+            <Label Text="Instructor"/>
+            <Picker ItemsSource="{Binding InstructNames}" SelectedIndex="{Binding InstructNames}"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Delete"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
